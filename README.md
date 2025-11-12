@@ -4,7 +4,7 @@ The only stack you'll ever need.
 
 - Nightly
 - [Leptos](https://leptos.dev)
-- [Axum](github.com/tokio-rs/axum)
+- [Axum](https://github.com/tokio-rs/axum)
 - [Compression](https://docs.rs/tower-http/latest/tower_http/compression/)
 - [Surrealdb](https://surrealdb.com)
 - [Singlestage](https://singlestage.doordesk.net)
