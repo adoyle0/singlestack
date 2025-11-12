@@ -1,0 +1,21 @@
+[package]
+name = "server"
+authors = ["{{ authors }}"]
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+app = { path = "../app", default-features = false, features = ["ssr"] }
+axum.workspace = true
+leptos = { workspace = true, features = ["ssr"] }
+leptos_axum.workspace = true
+log.workspace = true
+serde = { workspace = true, features = ["derive"] }
+simple_logger.workspace = true
+surrealdb.workspace = true
+tokio = { workspace = true, features = ["full"] }
+tower = { workspace = true, features = ["full"] }
+tower-http = { workspace = true, features = [
+  "compression-full",
+  "decompression-full",
+] }
