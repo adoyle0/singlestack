@@ -1,5 +1,5 @@
 [workspace]
-members = ["app", "common", "hydrate", "server", "src-tauri"]
+members = ["app", "hydrate", "src-tauri"]
 resolver = "2"
 
 [workspace.dependencies]
@@ -13,7 +13,7 @@ leptos_axum = { version = "0.8" }
 leptos_meta = { version = "0.8" }
 leptos_router = { version = "0.8", features = ["nightly"] }
 log = "0.4"
-serde = "1.0"
+serde = { version = "1.0", features = ["derive"] }
 serde_json = "1"
 simple_logger = "5.0"
 singlestage = { version = "0.4", features = ["nightly"] }
@@ -46,10 +46,11 @@ always-erase-components = false
 # bin-cargo-args = ["--timings"]
 # bin-cargo-command = "cross"
 bin-default-features = false
-bin-features = []
+bin-package = "app"
+bin-features = ["ssr"]
 # bin-profile-dev = "debug"
 # bin-profile-release = "release"
-bin-target = "server"
+bin-target = "app"
 # bin-target-triple = "x86_64-unknown-linux-gnu" # Env: LEPTOS_BIN_TARGET_TRIPLE
 disable-erase-components = false
 features = []
@@ -57,6 +58,7 @@ hash-file-name = "hash.txt"
 hash-files = false
 # lib-cargo-args = ["--timings"]
 lib-default-features = false
+lib-package = "hydrate"
 lib-features = ["hydrate"]
 # lib-profile-dev = "debug"
 # lib-release-profile = "release"
@@ -68,15 +70,13 @@ wasm-opt-features = [
 
 # Site Parameters
 assets-dir = "public"
-bin-package = "server"
 browserquery = "defaults"
 disable-server-fn-hash = true
 end2end-cmd = "npx playwright test"
 end2end-dir = "end2end"
 env = "DEV"
 js-dir = "src"
-js-minify = false
-lib-package = "hydrate"
+js-minify = true
 name = "{{ project-name }}"
 output-name = "{{ project-name }}"
 reload-port = 3001
@@ -89,4 +89,4 @@ site-root = "target/site"
 # tailwind-config-file = "tailwind.config.js"
 tailwind-input-file = "style/tailwind.css"
 watch = true
-watch-additional-files = ["app", "hydrate", "server"]
+watch-additional-files = ["app", "hydrate"]

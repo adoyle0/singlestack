@@ -1,5 +1,3 @@
-use crate::DATA_DIR;
-
 use surrealdb::{
     Surreal,
     engine::local::{Db, RocksDb},
@@ -7,7 +5,7 @@ use surrealdb::{
 
 /// Sets up the database
 pub async fn db_setup() -> surrealdb::Result<Surreal<Db>> {
-    let db = Surreal::new::<RocksDb>(format!("{}/{{ project-name }}.db", DATA_DIR)).await?;
+    let db = Surreal::new::<RocksDb>("data/{{ project-name }}.db").await?;
 
     db.use_ns("{{ project-name }}")
         .use_db("{{ project-name }}")

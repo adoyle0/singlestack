@@ -1,8 +1,13 @@
-use common::*;
 use leptos::prelude::*;
-
+use serde::{Deserialize, Serialize};
 #[cfg(feature = "ssr")]
 use surrealdb::{Surreal, engine::local::Db};
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct Todo {
+    pub id: Option<String>,
+    pub title: String,
+}
 
 // Endpoints need to be specified to ensure they match across ssr/csr builds
 #[server(endpoint = "add_todo")]
