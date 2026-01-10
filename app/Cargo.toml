@@ -1,6 +1,6 @@
 [package]
 name = "app"
-authors = ["Adam Doyle <adam@doordesk.net>"]
+authors = ["{{ authors }}"]
 version = "0.1.0"
 edition = "2024"
 
