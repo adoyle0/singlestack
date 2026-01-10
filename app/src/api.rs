@@ -5,7 +5,7 @@ use surrealdb::{Surreal, engine::local::Db};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Todo {
-    pub id: Option<String>,
+    pub id: String,
     pub title: String,
 }
 

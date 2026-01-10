@@ -51,11 +51,7 @@ pub fn Home() -> impl IntoView {
                     let todos = todos.await.unwrap_or_default();
                     view! {
                         <ul>
-                            <For
-                                each=move || todos.to_owned()
-                                key=|todo| todo.id.clone().unwrap()
-                                let(todo)
-                            >
+                            <For each=move || todos.to_owned() key=|todo| todo.id.clone() let(todo)>
                                 <li>
                                     <Button
                                         aria_label="Delete todo"
@@ -63,7 +59,7 @@ pub fn Home() -> impl IntoView {
                                         size="sm"
                                         variant="ghost"
                                         on:click=move |_| {
-                                            let id = todo.id.clone().unwrap();
+                                            let id = todo.id.clone();
                                             spawn_local(async move {
                                                 let res = delete_todo(id).await;
                                                 if res.is_ok() {
