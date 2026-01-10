@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "identifier": "com.{{ project-name }}.dev",
   "build": {
-    "beforeDevCommand": "trunk serve",
+    "beforeDevCommand": "trunk serve --features csr",
     "devUrl": "http://localhost:3010",
-    "beforeBuildCommand": "trunk build",
+    "beforeBuildCommand": "trunk build --features csr",
     "frontendDist": "../dist"
   },
   "app": {

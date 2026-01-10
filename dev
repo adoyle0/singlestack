@@ -2,7 +2,7 @@
 
 case $1 in
     csr)
-        trunk serve
+        trunk serve --features csr
         ;;
     ssr)
         LEPTOS_SITE_ADDR="0.0.0.0:3000" cargo leptos watch

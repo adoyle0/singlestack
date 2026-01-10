@@ -18,8 +18,24 @@ thiserror.workspace = true
 singlestage = { workspace = true, optional = true }
 surrealdb = { workspace = true, optional = true }
 
+# csr
+console_error_panic_hook = { workspace = true, optional = true }
+console_log = { workspace = true, optional = true }
+log = { workspace = true, optional = true }
+
+[dev-dependencies]
+wasm-bindgen = { workspace = true }
+wasm-bindgen-test = { workspace = true }
+web-sys = { workspace = true, features = ["Document", "Window"] }
+
 [features]
-csr = ["leptos/csr", "singlestage/csr"]
+csr = [
+  "dep:console_error_panic_hook",
+  "dep:console_log",
+  "dep:log",
+  "leptos/csr",
+  "singlestage/csr",
+]
 default = ["dep:singlestage"]
 hydrate = ["leptos/hydrate", "singlestage/hydrate"]
 ssr = [
