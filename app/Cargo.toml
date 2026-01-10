@@ -10,19 +10,23 @@ leptos_meta.workspace = true
 leptos_router.workspace = true
 leptos_axum = { workspace = true, optional = true }
 
+common = { path = "../common" }
+
 http.workspace = true
 cfg-if.workspace = true
 thiserror.workspace = true
 singlestage = { workspace = true, optional = true }
+surrealdb = { workspace = true, optional = true }
 
 [features]
 csr = ["leptos/csr", "singlestage/csr"]
 default = ["dep:singlestage"]
 hydrate = ["leptos/hydrate", "singlestage/hydrate"]
 ssr = [
+  "dep:leptos_axum",
+  "dep:surrealdb",
   "leptos/ssr",
   "leptos_meta/ssr",
   "leptos_router/ssr",
-  "dep:leptos_axum",
   "singlestage/ssr",
 ]

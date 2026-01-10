@@ -1,9 +1,13 @@
+mod api;
+mod routes;
+
 use leptos::prelude::*;
-use leptos_meta::{MetaTags, Stylesheet, Title, provide_meta_context};
+use leptos_meta::{MetaTags, Title, provide_meta_context};
 use leptos_router::{
     StaticSegment,
     components::{Route, Router, Routes},
 };
+use routes::*;
 use singlestage::*;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -29,58 +33,42 @@ pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
 
-    view! {
-        <Stylesheet id="leptos" href="/pkg/{{ project-name }}.css" />
+    // This tells the client where to find the server in csr builds
+    #[cfg(feature = "csr")]
+    leptos::server_fn::client::set_server_url("http://localhost:3000");
 
-        // sets the document title
+    view! {
+        {
+            #[cfg(not(feature = "csr"))]
+            // In csr mode the css file is sourced in index.html
+            view! { <leptos_meta::Stylesheet id="leptos" href="/pkg/{{ project-name }}.css" /> }
+        }
+
         <Title text="{{ project-name }}" />
 
-        // content for this welcome page
         <ThemeProvider>
+            <header>
+                <a href="/">
+                    <h1 class="text-2xl font-semibold m-4">
+                        "{{ project-name }}"
+                        {if cfg!(feature = "csr") {
+                            " csr"
+                        } else if cfg!(feature = "ssr") {
+                            " ssr"
+                        } else {
+                            ""
+                        }}
+                    </h1>
+                </a>
+            </header>
+
+            <Separator />
+
             <Router>
-                <Routes fallback=|| "Page not found.".into_view()>
-                    <Route path=StaticSegment("") view=HomePage />
+                <Routes fallback=NotFound>
+                    <Route path=StaticSegment("") view=Home />
                 </Routes>
             </Router>
         </ThemeProvider>
-    }
-}
-
-/// Renders the home page of your application.
-#[component]
-fn HomePage() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let count = RwSignal::new(0);
-    let on_click = move |_| *count.write() += 1;
-
-    view! {
-        <header>
-            <h1 class="text-2xl font-semibold m-4">"{{ project-name }}"</h1>
-        </header>
-
-        <Separator />
-
-        <main class="mx-4">
-            <Item class="w-fit" variant="outline">
-                <ItemContent>
-                    <ItemTitle class="text-2xl font-semibold">
-                        {if cfg!(feature = "csr") {
-                            "csr"
-                        } else if cfg!(feature = "hydrate") {
-                            "hydrate"
-                        } else if cfg!(feature = "ssr") {
-                            "ssr"
-                        } else {
-                            "else"
-                        }} " mode"
-                    </ItemTitle>
-                    <ItemActions>
-                        <Button on:click=on_click>"Click Me: " {count}</Button>
-                    </ItemActions>
-                </ItemContent>
-            </Item>
-        </main>
-
-        <Separator />
     }
 }

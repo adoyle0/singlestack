@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use {{crate_name}}::App;
+use {{ project-name }}::App;
 
 fn main() {
     // set up logging
