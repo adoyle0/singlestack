@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 use serde::{Deserialize, Serialize};
+
 #[cfg(feature = "ssr")]
 use surrealdb::{Surreal, engine::local::Db};
 

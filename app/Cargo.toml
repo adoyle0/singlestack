@@ -6,16 +6,16 @@ edition = "2024"
 
 [dependencies]
 leptos.workspace = true
+leptos_axum = { workspace = true, optional = true }
 leptos_meta.workspace = true
 leptos_router.workspace = true
-leptos_axum = { workspace = true, optional = true }
 
-http.workspace = true
 cfg-if.workspace = true
-thiserror.workspace = true
+http.workspace = true
+serde = { workspace = true }
 singlestage = { workspace = true, optional = true }
 surrealdb = { workspace = true, optional = true }
-serde = { workspace = true }
+thiserror.workspace = true
 
 # ssr
 axum = { workspace = true, optional = true }
@@ -47,7 +47,6 @@ csr = [
   "leptos/csr",
   "singlestage/csr",
 ]
-default = ["dep:singlestage"]
 hydrate = ["leptos/hydrate", "singlestage/hydrate"]
 ssr = [
   "dep:axum",
